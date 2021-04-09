@@ -29,3 +29,7 @@ export const reserve = async (username, court, time) => {
   }
   await db.ref(`/users/${username}/reservations`).push(newRevervation)
 }
+
+export const loadAllReservations = (username) => {
+  return db.ref(`/users/${username}/reservations`)
+}
