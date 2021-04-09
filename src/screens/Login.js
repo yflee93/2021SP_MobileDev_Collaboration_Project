@@ -5,38 +5,41 @@ import Background from '../components/Background'
 import TextInput from '../components/TextInput'
 import Header from '../components/Header'
 
-import { userbook, passwordbook } from '../../assets/userbook'
+import { Alert } from 'react-native'
+
+import { checkIfUserExists } from '../service/serviceInterface'
 
 export default class Login extends Component {
   state = {
     username: '',
     password: '',
   }
-  onsubmit = () => {
+  onsubmit = async () => {
     if (this.state.username === '') {
-      alert('Username cannot be empty!')
+      Alert.alert('Username cannot be empty!')
       return
     }
     if (this.state.password === '') {
-      alert('Paasword cannot be empty!')
+      Alert.alert('Paasword cannot be empty!')
       return
     }
-    let index = userbook.indexOf(this.state.username)
-    if (index === -1) {
-      alert('Username does not exist!')
+    let indb = await checkIfUserExists(this.state.username)
+    if (!indb) {
+      Alert.alert('Username does not exist!')
     } else {
-      if (passwordbook[index] === this.state.password) {
-        console.log('Successful!')
-        this.props.navigation.navigate('Default')
+      if (indb === this.state.password) {
+        Alert.alert('Successful!')
+        this.props.navigation.navigate('Default', {
+          username: this.state.username,
+        })
       } else {
-        alert('Wrong password!')
+        Alert.alert('Wrong password!')
       }
     }
   }
 
   toRegister = () => {
     this.props.navigation.navigate('Register')
-    console.log(userbook)
   }
 
   render() {

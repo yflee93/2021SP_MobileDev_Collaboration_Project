@@ -4,7 +4,9 @@ import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import Header from '../components/Header'
 
-import { userbook, passwordbook } from '../../assets/userbook'
+import { Alert } from 'react-native'
+
+import { createUser, checkIfUserExists } from '../service/serviceInterface'
 
 export default class Register extends Component {
   state = {
@@ -13,29 +15,28 @@ export default class Register extends Component {
     password2: '',
   }
 
-  onsubmit = () => {
-    console.log(userbook)
-    if (this.state.username == '') {
-      alert('username cannot be empty')
+  onsubmit = async () => {
+    if (this.state.username === '') {
+      Alert.alert('Username cannot be empty!')
       return
     }
     if (this.state.password1 == '' || this.state.password2 == '') {
-      alert('password cannot be empty')
+      Alert.alert('Password cannot be empty!')
       return
     }
 
-    let index = userbook.indexOf(this.state.username)
-    if (index !== -1) {
-      alert('This username has been used!')
+    let indb = await checkIfUserExists(this.state.username)
+    if (indb) {
+      Alert.alert('Username has been registered!')
     } else {
       if (this.state.password1 === this.state.password2) {
-        console.log('Successful!')
-        userbook.push(this.state.username)
-        passwordbook.push(this.state.password1)
-        console.log(userbook)
-        this.props.navigation.navigate('Default')
+        await createUser(this.state.username, this.state.password1)
+        Alert.alert('New user created successfully!')
+        this.props.navigation.navigate('Default', {
+          username: this.state.username,
+        })
       } else {
-        alert('passwords should be confirmed correctly!')
+        Alert.alert('Passwords do not match!')
       }
     }
   }
