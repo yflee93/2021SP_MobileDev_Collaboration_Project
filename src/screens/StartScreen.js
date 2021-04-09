@@ -20,6 +20,12 @@ export default class StartScreen extends Component {
         >
           Sign Up
         </Button>
+        <Button
+          mode='outlined'
+          onPress={() => this.props.navigation.navigate('Individual')}
+        >
+          Individual Court
+        </Button>
       </Background>
     )
   }
