@@ -5,23 +5,25 @@ import TimePicker from '../InsideComponents/TimePicker';
 import TimeSlotSelector from '../InsideComponents/TimeSlotSelector';
 
 class IndiCourtPage extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    state = {
+        courtName: 'Willard Park Tennis Courts',
+        courtLocation: '2500 Derby St, Berkeley, CA 94705',
+    }
 
     render() {
+        const { username } = this.props.route.params
         return(
             <View style={styles.container}>
                 {/* court information */}
                 <View style={styles.basicInfor}>
-                    <Text style={{fontWeight: 'bold', fontSize: 25, marginBottom: 15}}>Willard Park Tennis Courts</Text>
-                    <Text style={{fontSize: 20, marginBottom: 15}}>2500 Derby St, Berkeley, CA 94705</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 25, marginBottom: 15}}>{this.state.courtName}</Text>
+                    <Text style={{fontSize: 20, marginBottom: 15}}>{this.state.courtLocation}</Text>
                 </View>
                 
                 <View style={styles.registerSession}>
                     <TimePicker style={styles.dateSession}/>
                     <View style={styles.selectionSession}>
-                        <TimeSlotSelector/>
+                        <TimeSlotSelector court={this.state.courtName} username={username}/>
                     </View>
                 </View>
                 
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     },
     basicInfor: {
         flex: 2,
-        marginTop: 150,
+        marginTop: 50,
     },
     registerSession: {
         flex: 9,

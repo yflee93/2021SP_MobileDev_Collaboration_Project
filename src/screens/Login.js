@@ -40,6 +40,7 @@ export default class Login extends Component {
 
   toRegister = () => {
     this.props.navigation.navigate('Register')
+    console.log(this.props)
   }
 
   render() {

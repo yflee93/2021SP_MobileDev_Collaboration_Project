@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Text, View, FlatList, StyleSheet, Alert} from 'react-native';
 // import { Button } from 'react-native-elements';
 import ButtonReserve from '../components/ButtonReserve'
+import { reserve } from '../service/serviceInterface';
 
 const timeSlot = ["6am-7am", "7am-8am", "8am-9am", "9am-10am", "10am-11am", "11am-12pm", "12pm-1pm", "1pm-2pm",
 "2pm-3pm", "3pm-4pm", "4pm-5pm", "5pm-6pm", "6pm-7pm", "7pm-8pm", "8pm-9pm", "9pm-10pm", "10pm-11pm", "11pm-12am"]
@@ -13,7 +14,7 @@ class TimeSlotSelector extends React.Component {
         this.state = {
             disable: false,
             selectedTimes: [],
-            selectedTime: ''
+            selectedTime: '',
         }
     }
     
@@ -26,7 +27,8 @@ class TimeSlotSelector extends React.Component {
                     this.state.disable = true
                     this.state.selectedTime = time
                     this.setState(this.state)
-                    console.log(this.state.selectedTimes)
+                    reserve(this.props.username, this.props.court, time)
+                    console.log(this.props.username)
             }},
             {
                 text: 'Cancel',

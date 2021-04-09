@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, StyleSheet, ScrollView } from 'react-native';
+import { TouchableHighlight } from 'react-native';
+import { Text, View, FlatList, StyleSheet, ScrollView} from 'react-native';
+import ButtonReserve from '../components/ButtonReserve';
 
 const courts = [
   {
@@ -29,25 +31,34 @@ const courts = [
 ];
 
 export default class DetailedList extends Component {
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      source: courts,
+        source: courts,
+        username: this.props.username,
     }
+    this.renderItem = this.renderItem.bind(this)
   }
-
+  
   renderItem({item}) {
     return (
       <View style={ styles.row }>
-        <Text style={ styles.text }>
+        <Text style={ styles.text }
+              onPress={() => {
+                this.props.navigation.navigate('Individual', {
+                  username: this.state.username,
+                })
+          }}>
           { item.name }
         </Text>
       </View>
     )
   }
 
+
+
   render() {
+    const {navigation} = this.props;
     return (
         <ScrollView
         ref={ ref => this.scrollView = ref }
@@ -60,7 +71,8 @@ export default class DetailedList extends Component {
                 style={ styles.container }
                 data={ this.state.source }
                 renderItem={ this.renderItem }
-                keyExtractor={ item => item.name } />
+                keyExtractor={ item => item.name } 
+                />
         </ScrollView>
       );
   }
@@ -83,5 +95,10 @@ const styles = StyleSheet.create({
     marginTop: 40,
     alignItems: 'center',
     color: 'black',
-  }
+  },
+  timeBtn:{
+    width:112, 
+    height:45, 
+    marginLeft: 5
+  },
 })

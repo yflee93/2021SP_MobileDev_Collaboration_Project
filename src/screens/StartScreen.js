@@ -5,6 +5,7 @@ import Button from '../components/Button'
 
 export default class StartScreen extends Component {
   render() {
+    
     return (
       <Background>
         <Header>Go Tennis!</Header>
