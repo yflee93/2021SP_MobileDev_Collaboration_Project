@@ -6,7 +6,6 @@ import {
   TextInput,
   StyleSheet,
   Alert,
-  Button,
 } from 'react-native'
 
 import { addCourt } from '../service/serviceInterface'
@@ -17,6 +16,9 @@ export default class TestAdd extends Component {
     address: '',
     location: '',
     ratings: 0,
+    popularity: 0,
+    maintainence: 0,
+    rank: 0,
   }
 
   handleSubmit = async () => {
@@ -48,6 +50,18 @@ export default class TestAdd extends Component {
           placeholder='ratings'
           onChangeText={(text) => this.setState({ ratings: parseFloat(text) })}
         />
+        <TextInput
+          style={styles.itemInput}
+          placeholder='popularity'
+          onChangeText={(text) => this.setState({ popularity: parseInt(text) })}
+        />
+        <TextInput
+          style={styles.itemInput}
+          placeholder='maintainence(0-5 points)'
+          onChangeText={(text) =>
+            this.setState({ maintainence: parseFloat(text) })
+          }
+        />
         <TouchableHighlight
           style={styles.button}
           underlayColor='white'
@@ -66,7 +80,7 @@ const styles = StyleSheet.create({
     padding: 30,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#ff0000',
+    backgroundColor: 'lightblue',
   },
   title: {
     fontSize: 25,

@@ -22,15 +22,15 @@ export const checkIfUserExists = async (username) => {
   return a
 }
 
-export const reserve = async (username, court, time) => {
+export const reserve = async (username, court, time, date) => {
   const newRevervation = {
     courtKey: court.key,
     courtName: court.name,
+    date: date,
     time: time,
   }
   await db.ref(`/users/${username}/reservations`).push(newRevervation)
-  let index = convertTimetoIndex(time)
-  await db.ref(`/courts/${court.key}/reservations/${index}`).set(false)
+  await db.ref(`/courts/${court.key}/reservations/${date}`).set({ time: time })
 }
 
 export const cancelReserve = async (username, key) => {
@@ -47,53 +47,12 @@ export const addCourt = async (el) => {
     address: el.address,
     location: el.location,
     ratings: el.ratings,
-    reservations: [
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-    ],
+    popularity: el.popularity,
+    maintainence: el.maintainence,
+    rank: 0, //modify later with algo
   })
 }
 
 export const loadAllCourts = () => {
   return db.ref('/courts')
-}
-
-export const convertTimetoIndex = (time) => {
-  const timetable = [
-    '6am-7am',
-    '7am-8am',
-    '8am-9am',
-    '9am-10am',
-    '10am-11am',
-    '11am-12pm',
-    '12pm-1pm',
-    '1pm-2pm',
-    '2pm-3pm',
-    '3pm-4pm',
-    '4pm-5pm',
-    '5pm-6pm',
-    '6pm-7pm',
-    '7pm-8pm',
-    '8pm-9pm',
-    '9pm-10pm',
-    '10pm-11pm',
-    '11pm-12am',
-  ]
-  return timetable.indexOf(time)
 }

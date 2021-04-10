@@ -48,7 +48,7 @@ class TimeSlotSelector extends React.Component {
             this.state.disable = true
             this.state.selectedTime = time
             this.setState(this.state)
-            reserve(this.props.username, this.props.court, time)
+            reserve(this.props.username, this.props.court, time, '04/09/2021') //have to connect date with time, maybe put two components in one
             console.log(this.props.username)
           },
         },
@@ -75,7 +75,10 @@ class TimeSlotSelector extends React.Component {
       var myloop = []
       for (let i = 0; i < 6; i++) {
         myloop.push(
-          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'center' }}
+            key={i}
+          >
             {/* {() => this.innerLoop(i)} */}
             <ButtonReserve
               onPress={() => this._onPress(timeSlot[i * 3])}

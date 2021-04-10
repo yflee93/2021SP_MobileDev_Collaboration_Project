@@ -31,9 +31,10 @@ export default class DetailedList extends Component {
           }}
         >
           {item.value.name}
+
           {item.value.address}
+
           {item.value.ratings}
-          {item.key}
         </Text>
       </View>
     )
