@@ -6,6 +6,7 @@ import {
   Alert,
   TouchableOpacity,
   Button,
+  ScrollView,
 } from 'react-native'
 
 import { loadAllReservations } from '../service/serviceInterface'
@@ -110,13 +111,13 @@ export default class TopMenu extends Component {
       <View
         key={index}
         style={{
-          padding: 30,
-          backgroundColor: 'pink',
+          padding: 20,
+          backgroundColor: 'lightblue',
           justifyContent: 'center',
-          marginVertical: 10,
+          marginVertical: 2,
         }}
       >
-        <Text>{el.value.court}</Text>
+        <Text>{el.value.courtName}</Text>
         <Text>{el.value.time}</Text>
 
         <View style={styles.appButtonSection}>
@@ -146,7 +147,9 @@ export default class TopMenu extends Component {
         <Text style={styles.sectionHeadingStyle}>
           {this.state.username} 's Reservation Menu
         </Text>
-        <View>{componentList}</View>
+        <ScrollView ref={(ref) => (this.scrollView = ref)} pagingEnabled={true}>
+          {componentList}
+        </ScrollView>
       </View>
     )
   }
@@ -158,8 +161,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   sectionHeadingStyle: {
-    flex: 1,
-    fontSize: 22,
+    fontSize: 18,
     width: 400,
     color: 'black',
     backgroundColor: 'orange',

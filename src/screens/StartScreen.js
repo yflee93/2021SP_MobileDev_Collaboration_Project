@@ -5,7 +5,6 @@ import Button from '../components/Button'
 
 export default class StartScreen extends Component {
   render() {
-    
     return (
       <Background>
         <Header>Go Tennis!</Header>
@@ -23,9 +22,9 @@ export default class StartScreen extends Component {
         </Button>
         <Button
           mode='outlined'
-          onPress={() => this.props.navigation.navigate('Individual')}
+          onPress={() => this.props.navigation.navigate('AddCourt')}
         >
-          Individual Court
+          Add Court
         </Button>
       </Background>
     )

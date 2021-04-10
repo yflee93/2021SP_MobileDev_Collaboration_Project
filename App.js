@@ -10,6 +10,7 @@ import Login from './src/screens/Login'
 import Register from './src/screens/Register'
 import DefaultPage from './src/screens/DefaultPage'
 import IndiCourtPage from './src/screens/IndiCourtPage'
+import AddCourt from './src/screens/AddCourt'
 
 const Stack = createStackNavigator()
 
@@ -24,6 +25,7 @@ export default class App extends Component {
             <Stack.Screen name='Register' component={Register} />
             <Stack.Screen name='Default' component={DefaultPage} />
             <Stack.Screen name='Individual' component={IndiCourtPage} />
+            <Stack.Screen name='AddCourt' component={AddCourt} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

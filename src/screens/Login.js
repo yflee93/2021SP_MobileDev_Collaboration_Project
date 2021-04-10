@@ -28,7 +28,6 @@ export default class Login extends Component {
       Alert.alert('Username does not exist!')
     } else {
       if (indb === this.state.password) {
-        Alert.alert('Successful!')
         this.props.navigation.navigate('Default', {
           username: this.state.username,
         })

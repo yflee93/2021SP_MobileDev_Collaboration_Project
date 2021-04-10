@@ -31,7 +31,6 @@ export default class Register extends Component {
     } else {
       if (this.state.password1 === this.state.password2) {
         await createUser(this.state.username, this.state.password1)
-        Alert.alert('New user created successfully!')
         this.props.navigation.navigate('Default', {
           username: this.state.username,
         })

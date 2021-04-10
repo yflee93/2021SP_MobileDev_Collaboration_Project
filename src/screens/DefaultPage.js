@@ -13,10 +13,13 @@ export default class DefaultPage extends Component {
           <TopMenu username={username} />
         </View>
         <View style={styles.filterSession}>
-          <DropDownMenu/>
+          <DropDownMenu />
         </View>
         <View style={styles.rankSession}>
-          <DetailedList username={username} navigation={this.props.navigation}/>
+          <DetailedList
+            username={username}
+            navigation={this.props.navigation}
+          />
         </View>
       </View>
     )
@@ -30,9 +33,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   reservInfo: {
-    flex: 1.5,
+    flex: 2.5,
     // marginTop: 70,
-    marginBottom: 30,
+    // marginBottom: 30,
   },
   rankSession: {
     flex: 8,
