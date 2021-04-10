@@ -118,6 +118,7 @@ export default class TopMenu extends Component {
         }}
       >
         <Text>{el.value.courtName}</Text>
+        <Text>{el.value.date}</Text>
         <Text>{el.value.time}</Text>
 
         <View style={styles.appButtonSection}>
