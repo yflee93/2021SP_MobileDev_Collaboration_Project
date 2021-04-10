@@ -30,7 +30,7 @@ export const reserve = async (username, court, time, date) => {
     time: time,
   }
   await db.ref(`/users/${username}/reservations`).push(newRevervation)
-  await db.ref(`/courts/${court.key}/reservations/${date}`).set({ time: time })
+  await db.ref(`/courts/${court.key}/reservations/${date}/${time}`).set(true)
 }
 
 export const cancelReserve = async (username, key) => {

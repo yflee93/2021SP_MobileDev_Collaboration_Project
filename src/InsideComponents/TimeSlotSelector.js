@@ -48,7 +48,9 @@ class TimeSlotSelector extends React.Component {
             this.state.disable = true
             this.state.selectedTime = time
             this.setState(this.state)
-            reserve(this.props.username, this.props.court, time, '04/09/2021') //have to connect date with time, maybe put two components in one
+            reserve(this.props.username, this.props.court, time, '04-09-2021') //have to connect date with time, maybe put two components in one
+            // note to Emma: the format of the date is MM-DD-YYYY, don't use /
+
             console.log(this.props.username)
           },
         },
