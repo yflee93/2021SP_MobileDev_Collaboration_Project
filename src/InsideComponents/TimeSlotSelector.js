@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { Text, View, FlatList, StyleSheet, Alert } from 'react-native'
 // import { Button } from 'react-native-elements';
 import ButtonReserve from '../components/ButtonReserve'
-import { reserve } from '../service/serviceInterface'
+import { cancelReserve, reserve } from '../service/serviceInterface'
+import { db } from '../../db'
 
 const timeSlot = [
   '6am-7am',
@@ -33,6 +34,7 @@ class TimeSlotSelector extends React.Component {
       disable: false,
       selectedTimes: [],
       selectedTime: '',
+      reserved: []
     }
   }
 
@@ -48,10 +50,7 @@ class TimeSlotSelector extends React.Component {
             this.state.disable = true
             this.state.selectedTime = time
             this.setState(this.state)
-            reserve(this.props.username, this.props.court, time, '04-09-2021') //have to connect date with time, maybe put two components in one
-            // note to Emma: the format of the date is MM-DD-YYYY, don't use /
-
-            console.log(this.props.username)
+            reserve(this.props.username, this.props.court, time, this.props.date)
           },
         },
         {
@@ -63,6 +62,8 @@ class TimeSlotSelector extends React.Component {
             this.state.disable = true
             this.state.selectedTime = ''
             this.setState(this.state)
+            // console.log(this.props.username.key)
+            cancelReserve(this.props.username, this.props.court, this.props.date, time)
           },
         },
         {
@@ -72,7 +73,35 @@ class TimeSlotSelector extends React.Component {
     )
   }
 
+  reservedHandle = (time, index) => {
+    db.ref(`/courts/${this.props.court.key}/reservations/${this.props.date}/${time}`).on('value', (snapshot) => {
+      if(snapshot.exists()) {
+        let data = snapshot.val()
+        // console.log(data)
+        this.state.reserved.push(true)
+        this.setState(this.state)
+        // console.log(this.state.reserved[index])
+        // return true
+      } else {
+        this.state.reserved.push(false)
+        this.setState(this.state)
+        // return false
+      }
+    }
+  )
+}
+
+componentDidMount () {
+  for(let i = 0; i < 6; i++) {
+    for(let j = 0; j < 3; j++) {
+      this.reservedHandle(timeSlot[i * 3 + j], i * 3 + j)
+      console.log(this.state.reserved[i * 3 + j])
+    }
+  }
+}
+
   render() {
+    // console.log(this.state.disable)
     {
       var myloop = []
       for (let i = 0; i < 6; i++) {
@@ -92,6 +121,8 @@ class TimeSlotSelector extends React.Component {
                   : 'outlined'
               }
               style={styles.timeBtn}
+              disabled={this.state.reserved[i * 3]}
+              // disabled={console.log(this.state.reserved[i * 3])}
             >
               {timeSlot[i * 3]}
             </ButtonReserve>
@@ -105,6 +136,8 @@ class TimeSlotSelector extends React.Component {
               }
               onPress={() => this._onPress(timeSlot[i * 3 + 1])}
               style={styles.timeBtn}
+              disabled={this.state.reserved[i * 3 + 1]}
+              // disabled={console.log(this.state.reserved[i * 3 + 1])}
             >
               {timeSlot[i * 3 + 1]}
             </ButtonReserve>
@@ -118,6 +151,7 @@ class TimeSlotSelector extends React.Component {
               }
               onPress={() => this._onPress(timeSlot[i * 3 + 2])}
               style={styles.timeBtn}
+              disabled={this.state.reserved[i * 3 + 2]}
             >
               {timeSlot[i * 3 + 2]}
             </ButtonReserve>
@@ -128,6 +162,7 @@ class TimeSlotSelector extends React.Component {
     return (
       <View>
         {/* <Text>{this.state.selectedTime}</Text> */}
+        {/* {this.reservedLoop} */}
         {myloop}
       </View>
     )

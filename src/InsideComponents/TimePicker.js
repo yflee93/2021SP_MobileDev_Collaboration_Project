@@ -4,6 +4,7 @@ import { Text, View, FlatList, StyleSheet, Image, Button, TouchableOpacity} from
 
 import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from 'moment';
+import TimeSlotSelector from './TimeSlotSelector';
 
 class TimePicker extends React.Component {
     constructor() {
@@ -36,7 +37,8 @@ class TimePicker extends React.Component {
     render() {
         return(
             <View>
-                <Text style={styles.timeText}>
+                <View style={{flex: 2}}>
+                    <Text style={styles.timeText}>
                     {this.state.chosenDate}
                 </Text>
 
@@ -53,6 +55,14 @@ class TimePicker extends React.Component {
                     // minimumDate={new Date(2021, 4, 1)}
                     // maximumDate={new Date(2021, 4, 8)}
                     />
+                </View>
+                
+                <View style={styles.selectionSession}>          
+                    <TimeSlotSelector   
+                        court={this.props.court} 
+                        username={this.props.username}
+                        date={this.state.chosenDate}/>
+                </View>
             </View>
         )
     }
@@ -66,7 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#3c096c',
         borderRadius: 30,
         justifyContent: 'center',
-        marginTop: 10,
+        left: 50
     },
     text: {
         color: 'white',
@@ -81,10 +91,15 @@ const styles = StyleSheet.create({
     },
     textWarning: {
         fontSize:10,
-        // textAlign: 'center',
         marginTop: 3,
-        // justifyContent: 'center'
-    }
+        alignItems: 'center',
+        left: 50
+    },
+    selectionSession: {
+        flex: 8,
+        marginTop: 25,
+        alignItems: 'center'
+      },
 });
 
 export default TimePicker;

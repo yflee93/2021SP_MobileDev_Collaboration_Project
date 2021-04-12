@@ -20,10 +20,10 @@ class IndiCourtPage extends React.Component {
         </View>
 
         <View style={styles.registerSession}>
-          <TimePicker style={styles.dateSession} />
-          <View style={styles.selectionSession}>
+          <TimePicker court={court} username={username}/>
+          {/* <View style={styles.selectionSession}>
             <TimeSlotSelector court={court} username={username} />
-          </View>
+          </View> */}
         </View>
       </View>
     )
@@ -42,16 +42,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   registerSession: {
-    flex: 9,
-    alignItems: 'center',
-  },
-  dateSession: {
-    flex: 2,
-    alignItems: 'center',
-  },
-  selectionSession: {
-    flex: 7,
-    marginTop: 25,
+    flex: 10,
     alignItems: 'center',
   },
 })

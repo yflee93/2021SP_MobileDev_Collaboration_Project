@@ -22,7 +22,7 @@ export const checkIfUserExists = async (username) => {
   return a
 }
 
-export const reserve = async (username, court, time, date) => {
+export const reserve = async (username, court, date, time) => {
   const newRevervation = {
     courtKey: court.key,
     courtName: court.name,
@@ -30,11 +30,12 @@ export const reserve = async (username, court, time, date) => {
     time: time,
   }
   await db.ref(`/users/${username}/reservations`).push(newRevervation)
-  await db.ref(`/courts/${court.key}/reservations/${date}/${time}`).set(true)
+  await db.ref(`/courts/${court.key}/reservations/${time}/${date}`).set(true)
 }
 
-export const cancelReserve = async (username, key) => {
-  await db.ref(`/users/${username}/reservations`).child(key).remove()
+export const cancelReserve = async (username, court, time, date) => {
+  // await db.ref(`/users/${username}/reservations`).child(key).remove()
+  await db.ref(`/courts/${court.key}/reservations/${time}/${date}`).remove()
 }
 
 export const loadAllReservations = (username) => {
