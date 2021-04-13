@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Text, View, FlatList, StyleSheet, Alert } from 'react-native'
 // import { Button } from 'react-native-elements';
 import ButtonReserve from '../components/ButtonReserve'
-import { cancelReserve, reserve } from '../service/serviceInterface'
+import { reserve } from '../service/serviceInterface'
 import { db } from '../../db'
 
 const timeSlot = [
@@ -41,7 +41,7 @@ class TimeSlotSelector extends React.Component {
   _onPress = (time) => {
     Alert.alert(
       'Reservation Information',
-      `\n Do you want to researve the court for ${time}?`,
+      `\n Do you want to reserve the court for ${time}?`,
       [
         {
           text: 'Reserve',
@@ -51,24 +51,6 @@ class TimeSlotSelector extends React.Component {
             this.state.selectedTime = time
             this.setState(this.state)
             reserve(
-              this.props.username,
-              this.props.court,
-              this.props.date,
-              time
-            )
-          },
-        },
-        {
-          text: 'Cancel',
-          onPress: () => {
-            this.state.selectedTimes = this.state.selectedTimes.filter(
-              (selectTime) => selectTime !== time
-            )
-            this.state.disable = true
-            this.state.selectedTime = ''
-            this.setState(this.state)
-            // console.log(this.props.username.key)
-            cancelReserve(
               this.props.username,
               this.props.court,
               this.props.date,

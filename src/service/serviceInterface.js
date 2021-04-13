@@ -33,9 +33,15 @@ export const reserve = async (username, court, date, time) => {
   await db.ref(`/courts/${court.key}/reservations/${date}/${time}`).set(true)
 }
 
-export const cancelReserve = async (username, court, date, time) => {
-  // await db.ref(`/users/${username}/reservations`).child(key).remove()
-  await db.ref(`/courts/${court.key}/reservations/${date}/${time}`).remove()
+export const cancelReserve = async (
+  username,
+  reservationID,
+  courtKey,
+  date,
+  time
+) => {
+  await db.ref(`/users/${username}/reservations`).child(reservationID).remove()
+  await db.ref(`/courts/${courtKey}/reservations/${date}/${time}`).remove()
 }
 
 export const loadAllReservations = (username) => {

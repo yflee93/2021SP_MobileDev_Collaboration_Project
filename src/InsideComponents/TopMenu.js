@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native'
 
-import { loadAllReservations } from '../service/serviceInterface'
+import { loadAllReservations, cancelReserve } from '../service/serviceInterface'
 
 export default class TopMenu extends Component {
   state = {
@@ -63,21 +63,29 @@ export default class TopMenu extends Component {
     ])
   }
 
-  cancelPress = () => {
+  cancelPress = (el) => {
     Alert.alert('Confirm', 'Do you want to cancel your reservation?', [
       {
         text: 'Yes',
-        onPress: () =>
+        onPress: () => {
+          cancelReserve(
+            this.state.username,
+            el.key,
+            el.value.courtKey,
+            el.value.date,
+            el.value.time
+          )
           Alert.alert(
             'Success',
             'You have canceled your reservation. See you next time!',
             [
               {
                 text: 'Ok',
-                onPress: () => console.log('Pressed OK'),
+                onPress: () => console.log('OK'),
               },
             ]
-          ),
+          )
+        },
       },
       {
         text: 'No',
@@ -136,7 +144,7 @@ export default class TopMenu extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.appButtonContainer}
-            onPress={this.cancelPress}
+            onPress={() => this.cancelPress(el)}
           >
             <Text style={styles.appButtonText}> Cancellation </Text>
           </TouchableOpacity>
