@@ -23,9 +23,9 @@ class TimePicker extends React.Component {
     }
   }
 
-  handlePicker = (datetime) => {
+  handlePicker = async (datetime) => {
     console.log(this.state.chosenDate)
-    this.setState(
+    await this.setState(
       {
         isVisible: false,
         chosenDate: moment(datetime).format('MMMM Do YYYY'),
@@ -54,13 +54,15 @@ class TimePicker extends React.Component {
         <View style={{ flex: 2 }}>
           <Text style={styles.timeText}>{this.state.chosenDate}</Text>
 
-          <TouchableOpacity style={styles.button} onPress={this.showPicker}>
+          <TouchableOpacity style={{...styles.button, left: this.state.chosenDate? 50 : 0}} onPress={this.showPicker}>
             <Text style={styles.text}>Select A Date</Text>
           </TouchableOpacity>
-          <Text style={styles.textWarning}>
+
+          <Text style={{...styles.textWarning, left: this.state.chosenDate? 50 : 0}}>
             Warning: we are only allow to register within 7 days
           </Text>
-          <Text style={styles.textWarning}>since today!</Text>
+          <Text style={{...styles.textWarning, left: this.state.chosenDate? 50 : 0}}>since today!</Text>
+
           <DateTimePicker
             isVisible={this.state.isVisible}
             onConfirm={this.handlePicker}
@@ -90,7 +92,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#3c096c',
     borderRadius: 30,
     justifyContent: 'center',
-    left: 50,
   },
   text: {
     color: 'white',
@@ -107,7 +108,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginTop: 3,
     alignItems: 'center',
-    left: 50,
   },
   selectionSession: {
     flex: 8,

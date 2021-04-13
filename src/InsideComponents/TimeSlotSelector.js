@@ -106,45 +106,35 @@ class TimeSlotSelector extends React.Component {
             {/* {() => this.innerLoop(i)} */}
             <ButtonReserve
               onPress={() => this._onPress(timeSlot[i * 3])}
-              mode={
-                this.state.disable &&
-                (this.state.selectedTimes.includes(timeSlot[i * 3]) ||
-                  this.state.selectedTime === timeSlot[i * 3])
-                  ? 'contained'
-                  : 'outlined'
-              }
+              mode={'outlined'}
               style={styles.timeBtn}
-              disabled={this.state.reserved[i * 3]}
+              // disabled={this.state.reserved[i * 3]}
+              disabled={(this.state.disable && this.state.selectedTime === timeSlot[i * 3]) || this.state.reserved[i * 3]}
               // disabled={console.log(this.state.reserved[i * 3])}
             >
               {timeSlot[i * 3]}
             </ButtonReserve>
             <ButtonReserve
-              mode={
-                this.state.disable &&
-                (this.state.selectedTimes.includes(timeSlot[i * 3 + 1]) ||
-                  this.state.selectedTime === timeSlot[i * 3 + 1])
-                  ? 'contained'
-                  : 'outlined'
-              }
               onPress={() => this._onPress(timeSlot[i * 3 + 1])}
+              mode={'outlined'}
               style={styles.timeBtn}
-              disabled={this.state.reserved[i * 3 + 1]}
+              disabled={(this.state.disable && this.state.selectedTime === timeSlot[i * 3 + 1]) || this.state.reserved[i * 3 + 1]}
               // disabled={console.log(this.state.reserved[i * 3 + 1])}
             >
               {timeSlot[i * 3 + 1]}
             </ButtonReserve>
             <ButtonReserve
-              mode={
-                this.state.disable &&
-                (this.state.selectedTimes.includes(timeSlot[i * 3 + 2]) ||
-                  this.state.selectedTime === timeSlot[i * 3 + 2])
-                  ? 'contained'
-                  : 'outlined'
-              }
+              // mode={
+              //   this.state.disable &&
+              //   (this.state.selectedTimes.includes(timeSlot[i * 3 + 2]) ||
+              //     this.state.selectedTime === timeSlot[i * 3 + 2])
+              //     ? 'contained'
+              //     : 'outlined'
+              // }
               onPress={() => this._onPress(timeSlot[i * 3 + 2])}
+              mode={'outlined'}
               style={styles.timeBtn}
-              disabled={this.state.reserved[i * 3 + 2]}
+              disabled={(this.state.disable && this.state.selectedTime === timeSlot[i * 3 + 2]) || this.state.reserved[i * 3 + 2]}
             >
               {timeSlot[i * 3 + 2]}
             </ButtonReserve>
