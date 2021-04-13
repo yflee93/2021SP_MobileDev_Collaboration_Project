@@ -88,7 +88,7 @@ class TimeSlotSelector extends React.Component {
     for (let i = 0; i < 6; i++) {
       for (let j = 0; j < 3; j++) {
         this.reservedHandle(timeSlot[i * 3 + j], i * 3 + j)
-        console.log(this.state.reserved[i * 3 + j])
+        // console.log(this.state.reserved[i * 3 + j])
       }
     }
   }
