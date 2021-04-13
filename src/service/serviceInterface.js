@@ -63,3 +63,7 @@ export const addCourt = async (el) => {
 export const loadAllCourts = () => {
   return db.ref('/courts')
 }
+
+export const loadAllReservationsInDate = (courtKey, date) => {
+  return db.ref(`/courts/${courtKey}/reservations/${date}`)
+}
