@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { TouchableHighlight } from 'react-native'
 import { Text, View, FlatList, StyleSheet, ScrollView } from 'react-native'
-import ButtonReserve from '../components/ButtonReserve'
+import DropdownMenu from 'react-native-dropdown-menu'
 
 import { loadAllCourts } from '../service/serviceInterface'
 
@@ -11,6 +10,70 @@ export default class DetailedList extends Component {
     this.state = {
       source: [],
       username: this.props.username,
+      text: '',
+      sorted: [],
+      temp: [],
+    }
+  }
+
+  filterRankings = (filterChoice) => {
+    this.setState({ temp: [] })
+
+    if (filterChoice === 'Location') {
+      this.state.sorted = this.state.source
+    } else if (filterChoice === 'San Francisco') {
+      for (let i = 0; i < this.state.source.length; i++) {
+        if (this.state.source[i].value.location === filterChoice) {
+          this.state.temp.push({
+            key: this.state.source[i].key,
+            value: this.state.source[i].value,
+          })
+        }
+      }
+    } else if (filterChoice === 'San Jose') {
+      for (let i = 0; i < this.state.source.length; i++) {
+        if (this.state.source[i].value.location === filterChoice) {
+          this.state.temp.push({
+            key: this.state.source[i].key,
+            value: this.state.source[i].value,
+          })
+        }
+      }
+    } else if (filterChoice === 'Others') {
+      for (let i = 0; i < this.state.source.length; i++) {
+        if (this.state.source[i].value.location === filterChoice) {
+          this.state.temp.push({
+            key: this.state.source[i].key,
+            value: this.state.source[i].value,
+          })
+        }
+      }
+    }
+
+    if (this.state.temp.length !== 0) {
+      this.state.sorted = this.state.temp
+    } else {
+      this.state.sorted = this.state.sorted
+    }
+
+    //test if rank-by would return ranking based on rank
+    //test if location + ratings would work
+    if (filterChoice === 'Rank By') {
+      this.state.sorted = this.state.sorted.sort(function (a, b) {
+        return b.value.rank - a.value.rank
+      })
+    } else if (filterChoice === 'Ratings') {
+      this.state.sorted = this.state.sorted.sort(function (a, b) {
+        return b.value.ratings - a.value.ratings
+      })
+    } else if (filterChoice === 'Popularity') {
+      this.state.sorted = this.state.sorted.sort(function (a, b) {
+        return b.value.popularity - a.value.popularity
+      })
+    } else if (filterChoice === 'Maintainence') {
+      this.state.sorted = this.state.sorted.sort(function (a, b) {
+        return b.value.maintainence - a.value.maintainence
+      })
     }
   }
 
@@ -31,10 +94,9 @@ export default class DetailedList extends Component {
           }}
         >
           {item.value.name}
-
-          {item.value.address}
-
-          {item.value.ratings}
+          {item.value.address} || r: {item.value.ratings} || p:{' '}
+          {item.value.popularity} || m: {item.value.maintainence} || #:{' '}
+          {item.value.rank}
         </Text>
       </View>
     )
@@ -53,7 +115,11 @@ export default class DetailedList extends Component {
             value: values[i],
           })
         }
-        this.setState({ source: temp })
+        //apply rank sort
+        temp = temp.sort(function (a, b) {
+          return b.value.rank - a.value.rank
+        })
+        this.setState({ source: temp, sorted: temp })
       } else {
         this.setState({ source: [] })
       }
@@ -62,15 +128,39 @@ export default class DetailedList extends Component {
 
   render() {
     const { navigation } = this.props
+    var data = [
+      ['Location', 'San Francisco', 'San Jose', 'Others'],
+      ['Rank By', 'Ratings', 'Popularity', 'Maintainence'],
+    ]
     return (
-      <ScrollView ref={(ref) => (this.scrollView = ref)} pagingEnabled={true}>
-        <FlatList
-          style={styles.container}
-          data={this.state.source}
-          renderItem={this.renderItem}
-          keyExtractor={(item) => item.key}
-        />
-      </ScrollView>
+      <View>
+        <View style={styles.filterSession}>
+          <DropdownMenu
+            style={{ flex: 0.5 }}
+            bgColor={'orange'}
+            tintColor={'black'}
+            activityTintColor={'grey'}
+            handler={(selection, row) =>
+              this.setState({ text: data[selection][row] })
+            }
+            data={data}
+            onPress={this.filterRankings(this.state.text)}
+          ></DropdownMenu>
+        </View>
+        <View style={styles.rankSession}>
+          <ScrollView
+            ref={(ref) => (this.scrollView = ref)}
+            pagingEnabled={true}
+          >
+            <FlatList
+              style={styles.container}
+              data={this.state.sorted}
+              renderItem={this.renderItem}
+              keyExtractor={(item) => item.key}
+            />
+          </ScrollView>
+        </View>
+      </View>
     )
   }
 }
@@ -97,5 +187,14 @@ const styles = StyleSheet.create({
     width: 112,
     height: 45,
     marginLeft: 5,
+  },
+  rankSession: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  filterSession: {
+    flexDirection: 'row',
+    zIndex: 1,
+    alignItems: 'center',
   },
 })

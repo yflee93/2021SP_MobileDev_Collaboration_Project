@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Alert,
   TouchableOpacity,
-  Button,
   ScrollView,
 } from 'react-native'
 
@@ -116,15 +115,7 @@ export default class TopMenu extends Component {
 
   render() {
     const componentList = this.state.reservations.map((el, index) => (
-      <View
-        key={index}
-        style={{
-          padding: 20,
-          backgroundColor: 'lightblue',
-          justifyContent: 'center',
-          marginVertical: 2,
-        }}
-      >
+      <View key={index} style={styles.reserveBox}>
         <Text>{el.value.courtName}</Text>
         <Text>{el.value.date}</Text>
         <Text>{el.value.time}</Text>
@@ -158,6 +149,9 @@ export default class TopMenu extends Component {
         </Text>
         <ScrollView ref={(ref) => (this.scrollView = ref)} pagingEnabled={true}>
           {componentList}
+          {this.state.reservations.length === 0 ? (
+            <Text style={styles.reserveBox}>No Revervations</Text>
+          ) : null}
         </ScrollView>
       </View>
     )
@@ -177,7 +171,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   appButtonSection: {
-    flex: 2.6,
+    flex: 2.5,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
@@ -186,12 +180,18 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    marginTop: 40,
+    marginTop: 10,
   },
   appButtonText: {
     fontSize: 13,
     color: 'white',
     alignSelf: 'center',
     textTransform: 'uppercase',
+  },
+  reserveBox: {
+    padding: 20,
+    backgroundColor: 'lightblue',
+    justifyContent: 'center',
+    marginVertical: 2,
   },
 })

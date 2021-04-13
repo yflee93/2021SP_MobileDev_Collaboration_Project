@@ -56,7 +56,7 @@ export const addCourt = async (el) => {
     ratings: el.ratings,
     popularity: el.popularity,
     maintainence: el.maintainence,
-    rank: 0, //modify later with algo
+    rank: calculateRank(el),
   })
 }
 
@@ -66,4 +66,23 @@ export const loadAllCourts = () => {
 
 export const loadAllReservationsInDate = (courtKey, date) => {
   return db.ref(`/courts/${courtKey}/reservations/${date}`)
+}
+
+const calculateRank = (el) => {
+  let a = 0.5 * el.ratings
+  let b = 0.2 * el.maintainence
+  let c = 0
+  if (el.popularity < 10) {
+    c = 1
+  } else if (el.popularity < 30) {
+    c = 2
+  } else if (el.popularity < 50) {
+    c = 3
+  } else if (el.popularity < 75) {
+    c = 4
+  } else {
+    c = 5
+  }
+  c *= 0.3
+  return a + b + c
 }
