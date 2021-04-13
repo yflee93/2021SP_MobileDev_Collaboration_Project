@@ -17,7 +17,7 @@ export default class DetailedList extends Component {
   }
 
   filterRankings = (filterChoice) => {
-    this.setState({ temp: [] })
+    this.state.temp = []
 
     if (filterChoice === 'Location') {
       this.state.sorted = this.state.source
@@ -51,7 +51,7 @@ export default class DetailedList extends Component {
     }
 
     if (this.state.temp.length !== 0) {
-      this.state.sorted = this.state.temp
+        this.state.sorted = this.state.temp
     } else {
       this.state.sorted = this.state.sorted
     }
