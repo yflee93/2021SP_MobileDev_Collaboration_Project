@@ -14,6 +14,8 @@ import DateTimePicker from 'react-native-modal-datetime-picker'
 import moment from 'moment'
 import TimeSlotSelector from './TimeSlotSelector'
 
+let today = new Date()
+
 class TimePicker extends React.Component {
   constructor() {
     super()
@@ -76,6 +78,8 @@ class TimePicker extends React.Component {
             isVisible={this.state.isVisible}
             onConfirm={this.handlePicker}
             onCancel={this.hidePicker}
+            minimumDate={today}
+            maximumDate={new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7)}
           />
         </View>
         {this.state.chosenDate ? (
