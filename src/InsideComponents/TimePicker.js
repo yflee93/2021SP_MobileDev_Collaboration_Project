@@ -63,15 +63,7 @@ class TimePicker extends React.Component {
               left: this.state.chosenDate ? 50 : 0,
             }}
           >
-            Warning: we are only allow to register within 7 days
-          </Text>
-          <Text
-            style={{
-              ...styles.textWarning,
-              left: this.state.chosenDate ? 50 : 0,
-            }}
-          >
-            since today!
+            Warning: we are only allow to register within 7 days!
           </Text>
 
           <DateTimePicker
@@ -103,6 +95,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3c096c',
     borderRadius: 30,
     justifyContent: 'center',
+    marginTop:10
   },
   text: {
     color: 'white',
