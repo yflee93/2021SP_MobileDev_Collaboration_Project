@@ -51,7 +51,7 @@ export default class DetailedList extends Component {
     }
 
     if (this.state.temp.length !== 0) {
-        this.state.sorted = this.state.temp
+      this.state.sorted = this.state.temp
     } else {
       this.state.sorted = this.state.sorted
     }
@@ -79,29 +79,30 @@ export default class DetailedList extends Component {
 
   renderItem = ({ item }) => {
     return (
-      <View style={{width: 380, alignItems: 'center'}}>
-         <View style={styles.row}>
-        <Text
-          style={styles.text}
-          onPress={() => {
-            this.props.navigation.navigate('Individual', {
-              username: this.state.username,
-              court: {
-                key: item.key,
-                name: item.value.name,
-                address: item.value.address,
-              },
-            })
-          }}
-        >
-          {item.value.name}, 
-          {item.value.address} || r: {item.value.ratings} || p:{' '}
-          {item.value.popularity} || m: {item.value.maintainence} || #:{' '}
-          {item.value.rank}
-        </Text>
+      <View style={{ width: 380, alignItems: 'center' }}>
+        <View style={styles.row}>
+          <Text
+            style={styles.text}
+            onPress={() => {
+              this.props.navigation.navigate('Individual', {
+                username: this.state.username,
+                court: {
+                  key: item.key,
+                  name: item.value.name,
+                  address: item.value.address,
+                },
+              })
+            }}
+          >
+            {item.value.name},{'\n'}
+            {item.value.address},{'\n'}
+            {/* ratings: {item.value.ratings} || popularity: {item.value.popularity}
+            , {'\n'}
+            maintainence: {item.value.maintainence} || star:{' '}
+            {item.value.rank.toFixed(2)} */}
+          </Text>
+        </View>
       </View>
-      </View>
-      
     )
   }
 
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     marginBottom: 7,
-    padding:5
+    padding: 5,
   },
   text: {
     marginTop: 25,

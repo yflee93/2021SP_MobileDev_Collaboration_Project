@@ -20,12 +20,12 @@ export default class StartScreen extends Component {
         >
           Sign Up
         </Button>
-        <Button
+        {/* <Button
           mode='outlined'
           onPress={() => this.props.navigation.navigate('AddCourt')}
         >
           Add Court
-        </Button>
+        </Button> */}
       </Background>
     )
   }
