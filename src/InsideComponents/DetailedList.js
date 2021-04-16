@@ -79,7 +79,8 @@ export default class DetailedList extends Component {
 
   renderItem = ({ item }) => {
     return (
-      <View style={styles.row}>
+      <View style={{width: 380, alignItems: 'center'}}>
+         <View style={styles.row}>
         <Text
           style={styles.text}
           onPress={() => {
@@ -93,12 +94,14 @@ export default class DetailedList extends Component {
             })
           }}
         >
-          {item.value.name}
+          {item.value.name}, 
           {item.value.address} || r: {item.value.ratings} || p:{' '}
           {item.value.popularity} || m: {item.value.maintainence} || #:{' '}
           {item.value.rank}
         </Text>
       </View>
+      </View>
+      
     )
   }
 
@@ -137,7 +140,7 @@ export default class DetailedList extends Component {
         <View style={styles.filterSession}>
           <DropdownMenu
             style={{ flex: 0.5 }}
-            bgColor={'orange'}
+            bgColor={'#FF9E00'}
             tintColor={'black'}
             activityTintColor={'grey'}
             handler={(selection, row) =>
@@ -168,18 +171,20 @@ export default class DetailedList extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FF9E00',
   },
   row: {
-    width: 390,
+    width: 350,
     height: 100,
+    borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: 'lightgrey',
-    marginBottom: 3,
+    backgroundColor: 'white',
+    marginBottom: 7,
+    padding:5
   },
   text: {
-    marginTop: 40,
+    marginTop: 25,
     alignItems: 'center',
     color: 'black',
   },

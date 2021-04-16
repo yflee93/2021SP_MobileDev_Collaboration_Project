@@ -150,7 +150,7 @@ export default class TopMenu extends Component {
         <ScrollView ref={(ref) => (this.scrollView = ref)} pagingEnabled={true}>
           {componentList}
           {this.state.reservations.length === 0 ? (
-            <Text style={styles.reserveBox}>No Revervations</Text>
+            <Text style={styles.reserveBox}>You can make the reservation now!</Text>
           ) : null}
         </ScrollView>
       </View>
@@ -165,10 +165,13 @@ const styles = StyleSheet.create({
   },
   sectionHeadingStyle: {
     fontSize: 18,
+    fontWeight: 'bold',
     width: 400,
+    height: 40,
     color: 'black',
-    backgroundColor: 'orange',
+    backgroundColor: '#ff9e00',
     textAlign: 'center',
+    paddingTop: 10
   },
   appButtonSection: {
     flex: 2.5,
@@ -176,21 +179,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   appButtonContainer: {
-    backgroundColor: 'purple',
+    backgroundColor: '#5a189a',
     borderRadius: 25,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    marginTop: 10,
+    paddingVertical: 7,
+    paddingHorizontal: 8,
+    marginTop: 17,
   },
   appButtonText: {
-    fontSize: 13,
+    fontSize: 11,
     color: 'white',
     alignSelf: 'center',
     textTransform: 'uppercase',
   },
   reserveBox: {
-    padding: 20,
-    backgroundColor: 'lightblue',
+    height: 138,
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+    backgroundColor: '#DBC2F5',
     justifyContent: 'center',
     marginVertical: 2,
   },
