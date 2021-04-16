@@ -170,8 +170,10 @@ export default class DetailedList extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 20,
     flexDirection: 'row',
     backgroundColor: '#FF9E00',
+    paddingBottom: 110,
   },
   row: {
     width: 350,
