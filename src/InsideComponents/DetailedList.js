@@ -88,6 +88,9 @@ export default class DetailedList extends Component {
                   key: item.key,
                   name: item.value.name,
                   address: item.value.address,
+                  rating: item.value.ratings,
+                  popularity: item.value.popularity,
+                  maintain: item.value.maintainence,
                 },
               })
             }}

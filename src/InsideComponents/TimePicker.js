@@ -63,7 +63,7 @@ class TimePicker extends React.Component {
               left: this.state.chosenDate ? 50 : 0,
             }}
           >
-            Warning: we are only allow to register within 7 days!
+            Warning: we only allow reservations within 7 days! 
           </Text>
 
           <DateTimePicker

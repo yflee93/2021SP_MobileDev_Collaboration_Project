@@ -11,11 +11,14 @@ class IndiCourtPage extends React.Component {
       <View style={styles.container}>
         {/* court information */}
         <View style={styles.basicInfor}>
-          <Text style={{ fontWeight: 'bold', fontSize: 25, marginBottom: 15 }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10,fontFamily: 'American Typewriter', textAlign: 'center', marginLeft: 10,  marginRight: 10}}>
             {court.name}
           </Text>
-          <Text style={{ fontSize: 20, marginBottom: 15 }}>
+          <Text style={{ fontSize: 20, marginBottom: 10, fontFamily: 'American Typewriter', textAlign: 'center', marginLeft: 10,  marginRight: 10}}>
             {court.address}
+          </Text>
+          <Text style={{ fontSize: 15, marginBottom: 10, fontFamily: 'American Typewriter', textAlign: 'center'}}>
+            Rating: {court.rating}  Popularity: {court.popularity}  Maintainence: {court.maintain}
           </Text>
         </View>
 
