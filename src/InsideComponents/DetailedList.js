@@ -56,8 +56,6 @@ export default class DetailedList extends Component {
       this.state.sorted = this.state.sorted
     }
 
-    //test if rank-by would return ranking based on rank
-    //test if location + ratings would work
     if (filterChoice === 'Rank By') {
       this.state.sorted = this.state.sorted.sort(function (a, b) {
         return b.value.rank - a.value.rank
@@ -95,11 +93,7 @@ export default class DetailedList extends Component {
             }}
           >
             {item.value.name},{'\n'}
-            {item.value.address},{'\n'}
-            {/* ratings: {item.value.ratings} || popularity: {item.value.popularity}
-            , {'\n'}
-            maintainence: {item.value.maintainence} || star:{' '}
-            {item.value.rank.toFixed(2)} */}
+            {item.value.address} {'\n'}
           </Text>
         </View>
       </View>
@@ -119,7 +113,6 @@ export default class DetailedList extends Component {
             value: values[i],
           })
         }
-        //apply rank sort
         temp = temp.sort(function (a, b) {
           return b.value.rank - a.value.rank
         })
@@ -141,11 +134,12 @@ export default class DetailedList extends Component {
         <View style={styles.filterSession}>
           <DropdownMenu
             style={{ flex: 0.5 }}
-            bgColor={'#FF9E00'}
+            bgColor={'white'}
             tintColor={'black'}
             activityTintColor={'grey'}
             handler={(selection, row) =>
-              this.setState({ text: data[selection][row] })
+              this.setState({ text: data[selection][row] 
+              })
             }
             data={data}
             onPress={this.filterRankings(this.state.text)}
@@ -173,7 +167,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
     flexDirection: 'row',
-    backgroundColor: '#FF9E00',
+    backgroundColor: 'white',
     paddingBottom: 110,
   },
   row: {
@@ -182,14 +176,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#FF9E00',
     marginBottom: 7,
     padding: 5,
   },
   text: {
     marginTop: 25,
-    alignItems: 'center',
+    alignSelf: 'center',
     color: 'black',
+    fontFamily: 'Avenir',
+    textAlign: 'center',
   },
   timeBtn: {
     width: 112,

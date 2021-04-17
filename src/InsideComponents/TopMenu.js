@@ -116,9 +116,9 @@ export default class TopMenu extends Component {
   render() {
     const componentList = this.state.reservations.map((el, index) => (
       <View key={index} style={styles.reserveBox}>
-        <Text>{el.value.courtName}</Text>
-        <Text>{el.value.date}</Text>
-        <Text>{el.value.time}</Text>
+        <Text style={styles.reserveText}>{el.value.courtName}</Text>
+        <Text style={styles.reserveText}>{el.value.date}</Text>
+        <Text style={styles.reserveText}>{el.value.time}</Text>
 
         <View style={styles.appButtonSection}>
           <TouchableOpacity
@@ -150,7 +150,9 @@ export default class TopMenu extends Component {
         <ScrollView ref={(ref) => (this.scrollView = ref)} pagingEnabled={true}>
           {componentList}
           {this.state.reservations.length === 0 ? (
-            <Text style={styles.reserveBox}>You can make the reservation now!</Text>
+            <View style={styles.defaultBox}>
+            <Text style={styles.defaultText}>You can make reservations now!</Text>
+            </View>
           ) : null}
         </ScrollView>
       </View>
@@ -169,9 +171,10 @@ const styles = StyleSheet.create({
     width: 400,
     height: 40,
     color: 'black',
-    backgroundColor: '#ff9e00',
+    backgroundColor: 'white',
     textAlign: 'center',
-    paddingTop: 10
+    paddingTop: 10,
+    fontFamily: 'American Typewriter',
   },
   appButtonSection: {
     flex: 2.5,
@@ -183,7 +186,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingVertical: 7,
     paddingHorizontal: 8,
-    marginTop: 17,
+    marginTop: 12,
   },
   appButtonText: {
     fontSize: 11,
@@ -195,8 +198,30 @@ const styles = StyleSheet.create({
     height: 138,
     paddingVertical: 20,
     paddingHorizontal: 30,
-    backgroundColor: '#DBC2F5',
+    backgroundColor: '#FF9E00',
     justifyContent: 'center',
-    marginVertical: 2,
+    marginVertical: 5,
+    marginLeft: 25,
+    marginRight: 25,
+    borderRadius: 10,
   },
+  reserveText: {
+    fontFamily: 'Avenir',
+  },
+  defaultBox: {
+    height: 120,
+    paddingVertical:20,
+    paddingHorizontal: 30,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    marginVertical: 10,
+    marginLeft: 25,
+    marginRight: 25,
+    borderRadius: 10,
+    alignItems: 'center'
+  },
+  defaultText: {
+    fontSize: 18,
+    fontFamily: 'Avenir',
+  }
 })
