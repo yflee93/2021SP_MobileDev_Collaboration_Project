@@ -14,7 +14,7 @@ class IndiCourtPage extends React.Component {
           <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 10,fontFamily: 'American Typewriter', textAlign: 'center', marginLeft: 10,  marginRight: 10}}>
             {court.name}
           </Text>
-          <Text style={{ fontSize: 20, marginBottom: 10, fontFamily: 'American Typewriter', textAlign: 'center', marginLeft: 10,  marginRight: 10}}>
+          <Text style={{ fontSize: 18, marginBottom: 10, fontFamily: 'American Typewriter', textAlign: 'center', marginLeft: 10,  marginRight: 10}}>
             {court.address}
           </Text>
           <Text style={{ fontSize: 15, marginBottom: 10, fontFamily: 'American Typewriter', textAlign: 'center'}}>
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   registerSession: {
     flex: 10,
     alignItems: 'center',
+    marginTop:10
   },
 })
 
